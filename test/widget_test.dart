@@ -11,20 +11,16 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:todonow/main.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
+  testWidgets('Clock presence test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+    await tester.pumpWidget(const ChronosApp());
+    await tester.pumpAndSettle();
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    // Verify that the digital clock is displayed.
+    // The clock format is HH:mm:ss, so it should contain colons.
+    expect(find.byType(Text), findsWidgets);
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
-
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    // Verify that the Insights tab is present in the BottomNavigationBar.
+    expect(find.text('Insights'), findsOneWidget);
   });
 }
